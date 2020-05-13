@@ -1,0 +1,75 @@
+# 本文件从faunadb上下载下来，用于参考其schema的写法。
+directive @embedded on OBJECT
+directive @collection(name: String!) on OBJECT
+directive @index(name: String!) on FIELD_DEFINITION
+directive @resolver(
+  name: String
+  paginated: Boolean! = false
+) on FIELD_DEFINITION
+directive @relation(name: String) on FIELD_DEFINITION
+directive @unique(index: String) on FIELD_DEFINITION
+scalar Date
+
+# The `Long` scalar type  represents non-fractional signed whole numeric values.
+# Long can represent values between -(2^63) and 2^63 - 1.
+scalar Long
+
+type Mutation {
+  # Create a new document in the collection of 'Note'
+  createNote(
+    # 'Note' input values
+    data: NoteInput!
+  ): Note!
+  # Update an existing document in the collection of 'Note'
+  updateNote(
+    # The 'Note' document's ID
+    id: ID!
+    # 'Note' input values
+    data: NoteInput!
+  ): Note
+  # Delete an existing document in the collection of 'Note'
+  deleteNote(
+    # The 'Note' document's ID
+    id: ID!
+  ): Note
+}
+
+type Note {
+  # The document's ID.
+  _id: ID!
+  # The document's timestamp.
+  _ts: Long!
+  text: String!
+}
+
+# 'Note' input values
+input NoteInput {
+  text: String!
+}
+
+# The pagination object for elements of type 'Note'.
+type NotePage {
+  # The elements of type 'Note' in this page.
+  data: [Note]!
+  # A cursor for elements coming after the current page.
+  after: String
+  # A cursor for elements coming before the current page.
+  before: String
+}
+
+type Query {
+  # Find a document from the collection of 'Note' by its id.
+  findNoteByID(
+    # The 'Note' document's ID
+    id: ID!
+  ): Note
+  allNotes(
+    # The number of items to return per page.
+    _size: Int
+    # The pagination cursor.
+    _cursor: String
+  ): NotePage!
+}
+
+scalar Time
+

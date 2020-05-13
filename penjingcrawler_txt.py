@@ -17,7 +17,7 @@ Months = 12
 Base_Url = 'http://wuxizazhi.cnki.net/Magazine/ZGHP'  # 201301.html
 
 # Connect to mongo server, and get the magazines collection.
-db_client = MongoClient('mongodb://root:example@192.168.183.129:27017')
+db_client = MongoClient('mongodb://root:example@localhost:27017/?authSource=MagazinesDB')
 db = db_client.MagazinesDB
 magazines = db.magazines
 

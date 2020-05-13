@@ -9,7 +9,7 @@
 # 在"slim"层面编程，所用到的action，到下层utlity中作为函数实现；
 # 主程序中，由controller + monitor构成；
 # ------------------------------------------
-from utility import *
+from utility import *    # 引入模块，模块中的数据方法全部引出；python模块可看做是平行于类和对象的另一种容器.
 from aop_monitors import *
 
 @timer   # monitor

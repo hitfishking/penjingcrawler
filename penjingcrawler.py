@@ -16,7 +16,8 @@ Months = 12
 Base_Url = 'http://wuxizazhi.cnki.net/Magazine/ZGHP'  # 201301.html
 
 # Connect to mongo server, and get the magazines collection.
-db_client = MongoClient('mongodb://root:example@192.168.183.129:27017')
+# url在‘NoSQL Manager for MongoDB’的UI界面的connection管理页面中获得。
+db_client = MongoClient('mongodb://root:example@localhost:27017/?authSource=MagazinesDB')
 db = db_client.MagazinesDB
 penjing = db.penjing
 
@@ -28,13 +29,14 @@ for i_year in range(Year_Start,Year_End+1):
         print(i_url)
 
         # Get page by url.
-        response = urllib2.urlopen(i_url)
-        html_doc = response.read()
+        # response = urllib2.urlopen(i_url)
+        # html_doc = response.read()
         # print(html_doc)
+        html_doc = urllib2.urlopen(i_url).read()
 
         # Parse page into Soup.
         i_page = BeautifulSoup(html_doc, 'lxml')
-        list1 = i_page.find_all('span', 'litext')  # len(list1)=42
+        list1 = i_page.find_all('span', 'litext')  # len(list1)=42   //可用ipython进行局部语句的试验
         list2 = i_page.find_all('span', 'litext2')  # len(list2)=42
         # print 'len(list1)=' + str(len(list1)), 'len(list2)=' + str(len(list2))
 

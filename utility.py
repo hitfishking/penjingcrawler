@@ -28,8 +28,8 @@ def init_base_platform():
 
     def get_mongo_collection():
         db_client = MongoClient(mongodb_meta.get('db_url'))
-        test2 = db_client.MagazinesDB.test2
-        return test2
+        penjing2 = db_client.MagazinesDB.penjing2
+        return penjing2
 
     read_configs()
     global coll

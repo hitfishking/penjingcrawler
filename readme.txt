@@ -1,4 +1,4 @@
-# ------------------------------------------
+﻿# ------------------------------------------
 # 爬取中国知网《中国花卉盆景》杂志1985~2013年杂志目录；
 # 使用配置文件，保存爬取任务参数；
 # 使用mongodb存储爬取到的目录内容；
@@ -15,7 +15,15 @@ penjingcrawler.py只是一个普通的过程化程序；
 稍微复杂后，须要纳入一个适当的框架之中。
 由于本项目是一个"offline task processing"类应用，不是一个典型的，有UI，有人机交互的Web应用，
 故，MVC应用框架并不适合本项目；
+--------------------------------------------
 对于offline task processing类应用，典型的框架，应该是一个主控制器控制下的，data flow模型；
+甚至，可将本项目，仅看做ETL系统框架中的一个自定义组件而已；
+   ETL引擎，应该能够根据组件的配置，选用不同的容器/语言引擎，来运行相应的组件逻辑；(因为允许不同的组件使用不同的语言来写)
+   可参考drupal migrate系统的Migrate Tools和Migrate Plus体系结构；
+   source --> process --> destination；
+   本例source是web html source，该模块可用python BeautifulSoup来写；应该是可配置的；
+   本例process是原始数据的tree化模式映射定义；
+   本例destination是mongodb的collection的配置；
 --------------------------------------------
 {
     "_id" : ObjectId("5b2b9c07dab6ed3708a167e6"),
